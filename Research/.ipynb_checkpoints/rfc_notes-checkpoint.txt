@@ -1,0 +1,31 @@
+Random Forest Classifier Notes
+
+N_estimators
+n_estimators represents the number of trees in the forest. Usually the higher the number of trees the better to learn the data. However, adding a lot of trees can slow down the training process considerably, therefore we do a parameter search to find the sweet spot.
+
+
+max_depth
+max_depth represents the depth of each tree in the forest. The deeper the tree, the more splits it has and it captures more information about the data.
+
+min_samples_split
+min_samples_split represents the minimum number of samples required to split an internal node. This can vary between considering at least one sample at each node to considering all of the samples at each node. When we increase this parameter, each tree in the forest becomes more constrained as it has to consider more samples at each node.
+min number of data points placed in a node before the node is split
+
+max_features
+max_features represents the number of features to consider when looking for the best split.
+
+
+https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
+
+RandomizedSearchCV parametr 'csv'
+
+The technique of cross validation (CV) is best explained by example using the most common method, K-Fold CV. 
+When we approach a machine learning problem, we make sure to split our data into a training and a testing set. 
+In K-Fold CV, we further split our training set into K number of subsets, called folds. 
+We then iteratively fit the model K times, each time training the data on K-1 of the folds and evaluating on the Kth fold (called the validation data). 
+
+As an example, consider fitting a model with K = 5. 
+The first iteration we train on the first four folds and evaluate on the fifth. 
+The second time we train on the first, second, third, and fifth fold and evaluate on the fourth. 
+We repeat this procedure 3 more times, each time evaluating on a different fold. 
+At the very end of training, we average the performance on each of the folds to come up with final validation metrics for the model.

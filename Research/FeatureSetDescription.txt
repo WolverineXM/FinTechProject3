@@ -1,0 +1,54 @@
+
+SOURCE:  https://fred.stlouisfed.org/series/{ENTER MNEMONIC}
+         e.g.     https://fred.stlouisfed.org/series/BAMLH0A3HYC
+
+FRED Uses data provided and owned by ICE (https://www.theice.com/)
+
+The index data referenced on FRED's website is the property of ICE Data Indices, LLC, its affiliates, ("ICE") and/or its Third Party Suppliers and has been licensed for use by the Federal Reserve Bank of St. Louis. ICE, its affiliates and Third Party Suppliers accept no liability in connection with its use.
+
+##### High Level Description of Feature Set
+
+> The ICE BofA Option-Adjusted Spreads (OASs) are the calculated spreads between a computed OAS index of all bonds in a given rating category and a spot Treasury curve. 
+> An OAS index is constructed using each constituent bond's OAS, weighted by market capitalization.
+> Other bond inclusion rules exist, such as time to maturity, fixed vs. floating coupons, etc. but our primary concern is the rating for the indices.
+> Credit Default Swap (CDS) spreads would be preferred as they more accurately capture and target the credit risk of a bond, but this data is extremely expensive to source
+> Given this constraint, the following ICE BofA OAS indices were used as a proxy for the feature set data
+> All data was obtained using the Federal Reserve Economic Data (FRED) API
+> Additional criteria are also used for bond inclusion within the respective index (time to maturity, coupon structure, outstanding notional, etc.), however only a brief describtion relating the
+  rating differences between the indices has been presented below.
+
+
+FEATURE 1:  ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
+            > The ICE BofA High Yield Master II OAS uses an index of bonds that are below investment grade (those rated BB or below).
+            > This data represents the ICE BofA US High Yield Index value, which tracks the performance of US dollar denominated below investment grade rated corporate 
+              debt publicly issued in the US domestic market.
+
+FEATURE 2: ICE BofA US Corporate Index Option-Adjusted Spread (BAMLC0A0CM)
+           > The Corporate Master OAS uses an index of bonds that are considered investment grade (those rated BBB or better).
+           > This data represents the ICE BofA US Corporate Index value, which tracks the performance of US dollar denominated investment grade rated corporate 
+             debt publicly issued in the US domestic market.
+
+FEATURE 3: ICE BofA BBB US Corporate Index Option-Adjusted Spread (BAMLC0A4CBBB)
+           
+           > This data represents the Option-Adjusted Spread (OAS) of the ICE BofA BBB US Corporate Index
+           > A subset of the ICE BofA US Corporate Master Index tracking the performance of US dollar denominated investment grade rated corporate debt 
+             publicly issued in the US domestic market. 
+           > This subset includes all securities with a given investment grade rating BBB.
+
+FEATURE 4: ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
+
+           > This data represents the Option-Adjusted Spread (OAS) of the ICE BofA US Corporate BB Index
+           > A subset of the ICE BofA US High Yield Master II Index tracking the performance of US dollar denominated below investment grade rated corporate debt 
+             publicly issued in the US domestic market. 
+           > This subset includes all securities with a given investment grade rating BB.
+
+
+FEATURE 5: ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
+
+           > This data represents the Option-Adjusted Spread (OAS) of the ICE BofA US Corporate C Index
+           > A subset of the ICE BofA US High Yield Master II Index tracking the performance of US dollar denominated below investment grade rated corporate debt 
+             publicly issued in the US domestic market. 
+           > This subset includes all securities with a given investment grade rating CCC or below.
+
+
+
