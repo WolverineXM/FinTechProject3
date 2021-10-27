@@ -234,10 +234,10 @@ Once it was determined that the Optimal Model should use a 30 day lag of feature
 
 ![](images/feature_importance.PNG)
 
-Evidence exists that the feature set should be reduced and only include: 
-Feature 0 Index:  ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
-Feature 3 Index:  ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
-Feature 4 Index:  ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
+Evidence exists that the feature set should be reduced and only include the features at index 0, 3, and 4.  For you reference, these are:
+1. Feature 0 Index:  ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
+2. Feature 3 Index:  ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
+3. Feature 4 Index:  ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
 
 This additional test will be conducted in the future.
 
