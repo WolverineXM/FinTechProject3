@@ -5,7 +5,7 @@
 
 ### FRED API KEY
 
-The FRED API is used to obtain Option Adjusted Spread data, which represents the feature set data for model purposes.  The following steps outline the process for obtaining the required API key and saving for
+The FRED API is used to obtain Option Adjusted Spread data, which represents the feature set data for model purposes.  The following steps outline the process for obtaining the required API key and saving for use in the FRED library.
 
 1. Sign-Up for a free account and API Key at [St. Loius Fed User Account & API Key Request](https://research.stlouisfed.org/useraccount/apikey)
 
@@ -24,7 +24,7 @@ The FRED API is used to obtain Option Adjusted Spread data, which represents the
 
 4. [Full Fred Module Dependencies](https://github.com/7astro7/full_fred/blob/master/requirements.txt)
 
-The following block of code can be used to confirm the successful intallation of full_fred
+The following block of code with notebook [SourceData.ipynb](SourceData.ipynb) can be used to confirm the successful intallation of full_fred:
 
 ![The following block of code confirms successfull module installation](images/fred_api_dependency.PNG)
 
