@@ -37,6 +37,7 @@ Of note, this notebook also obtains data for other economic time series, but onl
 
 The data for the Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
 
+All raw data and data from the constructed data frames as saved to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
 
 [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)
 
@@ -58,7 +59,7 @@ Finally, an analysis of the two features exhibiting the highest degree of positi
 
 [rfc_model_target_feature_set_lag_analysis.ipynb](rfc_model_target_feature_set_lag_analysis.ipynb)
 
-Data visualization for lagged analysis between feature set and target set 
+Given that understanding the lagged relationship between the feature and target set is critical to the success of the investment strategy, this notebook is dedicted to visualizing lagged relationships between the feature set and target set.  This notebook also uses the hvplot.lag_plot() method and each OAS feature was paired with the data for the equity's daily price returns.
 
 [Current_rfc_model_optimal_lag_grid_automated.ipynb](Current_rfc_model_optimal_lag_grid_automated.ipynb)
 
