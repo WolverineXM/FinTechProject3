@@ -67,31 +67,21 @@ The runtime for this notebook is approximately 2 hours and is used for both the 
 
 Critical time periods used for research and development:
 
-Training Period Start Date = October 25, 2011
-Sufficient feature set data exists that allows for using lagged values that align with this training start date
-
-Training Period End Date = December 14, 2018
-Held constant for all in-sample testing
-
-Testing Period Start Date = December 15, 2018
-Held constant for all in-sample testing
-
-Testing Period End Dates was varied to allow for average model parameters to be calculated when using RandomizedSearchCV to determine optimal model parameters
-Range between October 1, 2021 to October 15, 2021
-
-Lagged time frames range from 1 Day to 90 Days
-
-Forward Test Start Date = Monday, October 18, 2021
+1. Training Period Start Date = October 25, 2011 (Held constant for all in-sample testing)
+2. Training Period End Date = December 14, 2018 (Held constant for all in-sample testing)
+3. Testing Period Start Date = December 15, 2018 (Held constant for all in-sample testing)
+4. Testing Period End Dates was varied to allow for average model parameters to be calculated when using RandomizedSearchCV to determine optimal model parameters.  The testing period range is between October 1, 2021 to October 15, 2021
+5.  Forward Test Start Date = Monday, October 18, 2021
 
 **Naive Model**
 
-The Naive Model arbitrarily sets the following values for the RandomForestClassifier (RFC) and all other parameters use defaul settings:
+The Naive Model arbitrarily sets the following values for the RandomForestClassifier (RFC) and all other parameters use default settings:
 
-n_estimators = 500
-max_depth = 5,000
-max_features = 'auto'
+`n_estimators = 500`
+`max_depth = 5,000`
+`max_features = 'auto'`
 
-Daily lagged values for the percentage change in OAS, ranging between 1 and end 90 days, were analyzed for the Naive Model. The same parameter values listed immediately above were used for the RFC on each iteration. The RFC model is manually split into training and testing time periods and the notebook is run for each period ending between October 1, 2021 to October 15, 2021.  The results from each days analysis is saved and mannually aggregegated into one file to determine which lag delivered the highest average annualized rate of return.  The use of a third partly library, pyfolio, was used to calculate the following performance statistics
+Daily lagged values for the percentage change in OAS, ranging between 1 and 90 days, were analyzed for the Naive Model. The same parameter values listed immediately above were used for the RFC on each iteration. The RFC model is manually split into training and testing time periods and the notebook is run for each period ending between October 1, 2021 to October 15, 2021.  The results from each days analysis is saved and mannually aggregegated into one file to determine which lag delivered the highest average annualized rate of return over the test period.  The use of a third partly library, pyfolio, was used to calculate the following performance statistics:
 
 `empyrical.annual_return(algo_performance_series)`
 
@@ -109,18 +99,22 @@ Daily lagged values for the percentage change in OAS, ranging between 1 and end 
 
 `empyrical.beta(algo_performance_series,Equity_performance_series)`
 
-The notebook also plots the key statiscs for the Naive Model's current period end using the pyfolio library empyrical.
+The notebook also plots the above statiscs for the Naive Model's current period end using the pyfolio library empyrical.
 
 On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date
 
-.joblib
+**.joblib**
+
 `fl_nm = 'model_candidates/nieve/Lag_' + str(i) + '_random_forest_' + testing_end + '.joblib'`
 `joblib.dump(model, fl_nm, compress=3)` 
+
+The following image illustrates the file versions for the 90 day lag
 ![](images/naive_model_testing_file_location_joblib.PNG)
 
-.csv
-fl_nm = 'AutoOutputFiles/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'
+**.csv**
 
+`fl_nm = 'AutoOutputFiles/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'`
+The following image illustrates the file versions for the 90 day lag
 ![](images/naive_model_testing_file_location_csv.PNG)
 
 Optimal Model
