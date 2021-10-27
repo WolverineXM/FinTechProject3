@@ -290,7 +290,7 @@ The results are currently stored within a Pandas Series, with eventual plans of 
 
 Let the Forward Test Battle Begin - well, only 6 days thus far!
 
-![](forward_test_results)
+![](images/forward_test_results.PNG)
 
 ### Usage Instructions
 
