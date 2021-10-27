@@ -14,7 +14,7 @@ In 1974, economist Robert C. Merton proposed this model for assessing the struct
 
 > In short, the model predicts a non-linear negative link between the default likelihood and asset value of a firm.
 
-Given the cost of obtaining Credit Default Swap data (preferred data but cost prohibitive), the use of Option Adjusted Spreads (OAS) is explored.  In addition, it is hypothesized that the use of a Machine Learning algorithm can be used to predict future equity market states.  See [Option-Adjusted Spread (OAS)](https://www.investopedia.com/terms/o/optionadjustedspread.asp) for a basic refresher on OASs.
+Given the cost of obtaining Credit Default Swap data (preferred data but cost prohibitive), the use of Option Adjusted Spreads (OAS) is explored.  In addition, it is hypothesized that the use of a Machine Learning algorithm can be used to predict future equity market states.  See [Option-Adjusted Spread (OAS)](https://www.investopedia.com/terms/o/optionadjustedspread.asp) for a basic refresher on OASs. It is hypothesized that the OAS captures sufficient risk levels to be used as a predictive indicator for future equity market states.
 
 For the purpose of this project, the the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) was selected as a proxy for the Equity Market.  
 
@@ -39,9 +39,7 @@ It is also recommended that the user read [Project_3_Presentation](Project_3_Pre
 
 This notebook retrieves data for both the feature and target sets:
 
-The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/) using their API services and library named `from full_fred.fred import Fred`.  See the instructions within the "Usage Instructions" section below on obtaining and saving the API from FRED.
-
-
+The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/) using their API services and library named `from full_fred.fred import Fred`.  See the "Usage Instructions" section below on obtaining and saving the API from FRED.
 
 Of note, this notebook also obtains data for other economic time series, but only OAS data for the above data series are used for modeling purposes.
 
@@ -57,19 +55,19 @@ A simple line plot confirms that some relationship exists between OAS levels and
 
 The Pearson Correlation Coefficient was used to confirm that the correlation between the daily percentage change in OAS is less than the correlation for OAS levels.
 
-The hvplot.scatter_matrix() method was used to also confirm that this apparent relationship between OAS levels is removed when transforming them into daily percentage changes.
+The `hvplot.scatter_matrix()` method was used to also confirm that this apparent relationship between OAS levels is removed when transforming them into daily percentage changes.
 
-An analysis on the distribution (density plot) for the OAS Levels and Daily Percentage Changes using hvplot.kde() also concluded that daily percentage changes were more appropriate for modeling purposes.
+An analysis on the distribution (density plot) for the OAS Levels and Daily Percentage Changes using `hvplot.kde()` also concluded that daily percentage changes were more appropriate for modeling purposes.
 
 An understanding of the disperion of OAS levels and rates of change was gained through the use of hvplot.violin().
 
-hvplot.lag_plot() was used to gain an understanding of any lagged relationships between the feature set variables.
+`hvplot.lag_plot()` was used to gain an understanding of any lagged relationships between the feature set variables.
 
-Finally, an analysis of the two features exhibiting the highest degree of positive correlation was conducted using .hvplot.bivariate()
+Finally, an analysis of the two features exhibiting the highest degree of positive correlation was conducted using `.hvplot.bivariate()`
 
 **Notebook:  [rfc_model_target_feature_set_lag_analysis.ipynb](rfc_model_target_feature_set_lag_analysis.ipynb)**
 
-Given that understanding the lagged relationship between the feature and target set is critical to the success of the investment strategy, this notebook is dedicted to visualizing lagged relationships between the feature set and target set.  This notebook also uses the hvplot.lag_plot() method and each OAS feature was paired with the data for the equity's daily price returns.
+Given that understanding the lagged relationship between the feature and target set is critical to the success of the investment strategy, this notebook is dedicted to visualizing lagged relationships between the feature set and target set.  This notebook also uses the `hvplot.lag_plot()` method and each OAS feature was paired with the data for the equity's daily price returns.
 
 **Notebook:  [Current_rfc_model_optimal_lag_grid_automated.ipynb](Current_rfc_model_optimal_lag_grid_automated.ipynb)**
 
@@ -109,11 +107,11 @@ Daily lagged values for the percentage change in OAS, ranging between 1 and 90 d
 
 `empyrical.beta(algo_performance_series,Equity_performance_series)`
 
-The notebook also plots the above statiscs for the Naive Model's current period end using the pyfolio library empyrical.
+The notebook also plots the above statiscs by lag for the Naive Model's current period end.
 
 On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date is the `fl_nm` variable:
 
-**.joblib**
+**.joblib files saved for future use**
 
 `fl_nm = 'model_candidates/nieve/Lag_' + str(i) + '_random_forest_' + testing_end + '.joblib'`
 `joblib.dump(model, fl_nm, compress=3)` 
@@ -121,12 +119,44 @@ On each iteration, a .csv and .joblib version of the model is saved to the follo
 The following image illustrates the file versions for the 90 day lag
 ![](images/naive_model_testing_file_location_joblib.PNG)
 
-**.csv**
+**.csv contains the cumulative performance of the strategy version compared with SPY**
 
 `fl_nm = 'AutoOutputFiles/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'`
 
 The following image illustrates the file versions for the 90 day lag
 ![](images/naive_model_testing_file_location_csv.PNG)
+
+The following files contain the computed performance statistics using the `empyrical` library and the October 1, 2021 to October 15, 2021 results are averaged to determine which lag produced the highest annual return expectation over this period.
+
+`fl_nm = 'AutoOutputFiles/df_strat_lag_' + testing_end + '.csv'`
+`df_strat_lag.to_csv(fl_nm)`
+
+Caputre statistics are also computed and the same aggregation and averaging process is understaken.
+`fl_name = 'AutoOutputFiles/df_capture_stats_' + testing_end + '.csv'`
+`df_capture_stats.to_csv(fl_name)`
+
+The capture statistics produced:
+`EquityDays = 'Total trading days in test period'`
+
+`EquityDaysPositive = 'Total positive equity return days in test period'`
+
+`EquityDaysNegative = 'Total negative equity return days in test period'`
+
+`StrategyDaysInEquity = 'Total days the strategy was invested in the equity security'`
+
+`StrategyDaysInCash = 'Total days the strategy was invested in cash'`
+
+`StrategyCapturePositive = 'Of the equity's positive days, how many days did the strategy capture'`
+
+`StrategyCaptureNegative = 'Of the equity's negative days, however may days did the strategy capture'`
+
+`EquityDays>=1% = 'Total number of days the equity delivered a return greater than or equal to 1%:  Positive Extreme'`
+
+`EquityDays<=-1% = 'Total number of days the equity delivered a return less than or equal to -1%:  Negative Extreme'`
+
+`StrategyCaptureExtremePositive = 'For the equity's positive extreme days, how many days did the strategy capture'`
+
+`StrategyCaptureExtremeNegative = 'For the equity's negative extreme days, how many days did the strategy capture'`
 
 **Optimal Model**
 
@@ -156,15 +186,11 @@ The daily results are saved to the following location and later manually aggrega
 The following image illustrates the file versions for the in-sample period:
 ![](images/best_params_file_location.PNG)
 
-The bottom portion of this notebook relates to the optimal model paramters and the data is also plotted for visual review.  The mean, standard deviation, skew,  and kurtosis for the current runs parameters accross all lags is also computed to describe the distribution of values.
-
-**Notebook:  [Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)**
-
-uses the mean optimal parameters from Current_rfc_model_optimal_lag_grid_automated.ipynb and model is new training and testing occurs for the October 1, 2021 to October 15, 2021 period based on the optimal parameters
+The bottom portion of this notebook relates to the optimal model paramters for the current run and the data is also plotted for visual review.  The mean, standard deviation, skew, and kurtosis for the current runs parameters, accross all lags, is also computed to describe the distribution of values.
 
 **Notebook:  [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb)**
 
-Based on the results from the October 1, 2021 to October 15, 2021 training and testing periods, the Mean Annualized Return Per Feature Lag In Days was calculated for the Naive Model and the lagged period with the highest average return was selected for Forward Testing purposes.  The standard deviation and skew are also calculated for future use.
+Based on the results from the October 1, 2021 to October 15, 2021 training and testing periods, the Mean Annualized Return Per Feature Lag In Days was calculated for the Naive Model and the lagged period with the highest average return was selected for Forward Testing purposes.  The standard deviation and skew are also calculated for future use.  The 27 day lagged period produced the highest average annual return during the in-sample period.
 
 This notebook also calculates the mean parameter values accross all lags to arrive at mean parameter values used for the Optimal Model.  Based on the October 1, 2021 - October 15, 2021 analysis, the paramter values used for the Optimal Model were:
 
@@ -172,6 +198,26 @@ n_estimators          477.0
 min_samples_split      31.0
 max_features            3.0
 max_depth            2988.0
+
+These values are used in the next notebook.
+
+**[Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)**
+
+The parameter values noted immediately above are held constant for all lags.  The RFC model with these parameters are once again trained and tested on the Obtober 1, 2021 - October 15, 2021 time periods.  The resulting analysis from the daily runs is then manually aggregated to determine which lag produced the highest average annual return over the test period.  Once the manual file has been constructed, the user can run [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb) again to determine which lag produced the highest expected annual return.  The plot named 'Mean Annualized Return Per Feature Lag In Days (Using Mean RandomizedSearchCV Model Parameters)' within the [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb) notebook confirms that a 30 Day lag with the 'optimaized parameters' should be selected for forward testing purposes.
+
+As with the Naive Model, capture statistics are also calculated and saved, where i = lag value and testing_end = period end date:
+
+`fl_name = 'algo_optimal_parameters/back_test_using_mean_grid_values/df_capture_stats_' + testing_end + '.csv'`
+
+The .joblib version for each model is saved here:
+
+`fl_nm = 'algo_optimal_parameters/back_test_using_mean_grid_values/Lag_' + str(i) + '_random_forest_' + testing_end + '.joblib'`
+
+`joblib.dump(model, fl_nm, compress=3)`
+
+The .csv files containing the performance metrics for each model version over each testing date:
+
+`fl_nm = 'algo_optimal_parameters/back_test_using_mean_grid_values/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'`
 
 **Notebook:  [Current_rfc_optimal_model_accuracy_feature_importance.ipynb](Current_rfc_optimal_model_accuracy_feature_importance.ipynb)**
 
