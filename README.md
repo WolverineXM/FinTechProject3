@@ -140,10 +140,13 @@ The RandomizedSearchCV also takes on the following parameters and assocated valu
 The daily results are saved to the following location and later manually aggregated into one file for use in [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb) to determine the average parameter values over the October 1, 2021 to October 15, 2021 in-sample period.
 
 `fl_name = 'AutoOutputFiles/df_best_params_' + testing_end + '.csv'`
+
 `df_best_params.to_csv(fl_name)`
 
 The following image illustrates the file versions for the in-sample period:
 ![](images/best_params_file_location.PNG)
+
+The bottom portion of this notebook relates to the optimal model paramters and the data is also plotted for visual review.  The mean, standard deviation, skew,  and kurtosis for the current runs parameters accross all lags is also computed to describe the distribution of values.
 
 **Notebook:  [Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)**
 
