@@ -82,18 +82,17 @@ The following block of code with notebook [SourceData.ipynb](SourceData.ipynb) c
 
 > yfinance aims to solve this problem by offering a reliable, threaded, and Pythonic way to download historical market data from Yahoo! finance.
 
-
 #### Full Library Requirements
 
 Refer to the [Requirements](Requirements.txt) for the all the liraries required to execute the notebooks.
 
-### Project Notebooks
+## Project Notebooks
 
 **Notebook:  [SourceData.ipynb](SourceData.ipynb)**
 
 This notebook retrieves data for both the feature and target sets:
 
-The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/) using their API services and library named `from full_fred.fred import Fred`.  See the "Usage Instructions" section below on obtaining and saving the API from FRED.
+The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/) using their API services and library named `from full_fred.fred import Fred`.
 
 Of note, this notebook also obtains data for other economic time series, but only OAS data for the above data series are used for modeling purposes.
 
