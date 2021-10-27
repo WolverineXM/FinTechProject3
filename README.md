@@ -296,7 +296,7 @@ RFC Accuracy During Training Period: 0.8709315375982043
 
 RFC Accuracy During Testing Period: 0.5686274509803921
 
-All results reflect a testing period ending on October 15, 2021.
+All results reflect a testing period ending of October 15, 2021.
 
 **Notebook:  [nieve_vs_random_grid_search_backtest_comparison.ipynb](nieve_vs_random_grid_search_backtest_comparison.ipynb)**
 
@@ -311,7 +311,7 @@ A cumulative return plot for the Equity Security, Naive Model, and Optimal Model
 
 Evidence exists that the Naive model offers better downside risk protection, but at the expense of some return.
 
-Evidence exists that the Optimal Model capture more downside risk, however delivers superior return for the majority of the test period.
+Evidence exists that the Optimal Model captures more downside risk, however delivers superior return for the majority of the test period.
 
 By the end of the test period, the unitized cumulative return for the Naive & Optimal Model are converging, suggesting that a longer test period may be required to understand which model is most appropriate.  The Forward Test results are also expected to aid in this endeavour, however a backtested version is ideal to conduct additional testings.
 
