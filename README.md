@@ -2,7 +2,7 @@
 
 ### Project Hypothesis
 
-Existing emperical evidence exists describing the relationship between [Credit Risk/Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets.  For the purpose of this project, the the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) was selected as a proxy for the U.S. Equity Market.  A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
+Existing emperical evidence exists describing the relationship between [Credit Risk/Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets. A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
 
 >>> A structural model with stochastic volatility and jumps implies particular relationships between observed equity returns and credit spreads. 
 
@@ -16,8 +16,20 @@ In 1974, economist Robert C. Merton proposed this model for assessing the struct
 
 Given the cost of obtaining Credit Default Swap data (preferred data but cost prohibitive), the use of Option Adjusted Spreads (OAS) is explored.  In addition, it is hypothesized that the use of a Machine Learning algorithm can be used to predict future equity market states.  See [Option-Adjusted Spread (OAS)](https://www.investopedia.com/terms/o/optionadjustedspread.asp) for a basic refresher on OASs.
 
+For the purpose of this project, the the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) was selected as a proxy for the Equity Market.  
+
+The Feature Set Variable Names & FRED Mnemonic:
+1. [ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)](https://fred.stlouisfed.org/series/BAMLH0A0HYM2)
+2. [ICE BofA US Corporate Index Option-Adjusted Spread (BAMLC0A0CM)](https://fred.stlouisfed.org/series/BAMLC0A0CM)
+3. [ICE BofA BBB US Corporate Index Option-Adjusted Spread (BAMLC0A4CBBB)](https://fred.stlouisfed.org/series/BAMLC0A4CBBB)
+4. [ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)](https://fred.stlouisfed.org/series/BAMLH0A1HYBB)
+5. [ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)](https://fred.stlouisfed.org/series/BAMLH0A3HYC)
+
 The Random Forest Classifier Model and RandomizedSearchCV are used to develop a Naive Model and Optimal Model to determine if either model can deliver an annual return higher than the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy).  The Optimal Model also attempts to achieve a superior annual rate of return by using model parameters obtained from RandomizedSearchCV (process described below).
 
+The hypothesis may be summarized as follows:
+
+> The use of lagged values for OAS accross
 ### Project Notebooks
 
 **Notebook:  [SourceData.ipynb](SourceData.ipynb)**
@@ -26,12 +38,7 @@ This notebook retrieves data for both the feature and target sets:
 
 The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/) using their API services and library named `from full_fred.fred import Fred`.  See the instructions within the "Usage Instructions" section below on obtaining and saving the API from FRED.
 
-The Feature Set Variable Names & FRED Mnemonic:
-1. [ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)](https://fred.stlouisfed.org/series/BAMLH0A0HYM2)
-2. [ICE BofA US Corporate Index Option-Adjusted Spread (BAMLC0A0CM)](https://fred.stlouisfed.org/series/BAMLC0A0CM)
-3. [ICE BofA BBB US Corporate Index Option-Adjusted Spread (BAMLC0A4CBBB)](https://fred.stlouisfed.org/series/BAMLC0A4CBBB)
-4. [ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)](https://fred.stlouisfed.org/series/BAMLH0A1HYBB)
-5. [ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)](https://fred.stlouisfed.org/series/BAMLH0A3HYC)
+
 
 Of note, this notebook also obtains data for other economic time series, but only OAS data for the above data series are used for modeling purposes.
 
