@@ -109,7 +109,7 @@ Daily lagged values for the percentage change in OAS, ranging between 1 and 90 d
 
 The notebook also plots the above statiscs by lag for the Naive Model's current period end.
 
-On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date is the `fl_nm` variable:
+On each iteration, a .csv and .joblib version of the model is saved to the following location, where i = lag value, testing_end = period end date is the `fl_nm` variable:
 
 **.joblib files saved for future use**
 
@@ -132,10 +132,13 @@ The following files contain the computed performance statistics using the `empyr
 `df_strat_lag.to_csv(fl_nm)`
 
 Caputre statistics are also computed and the same aggregation and averaging process is understaken.
+
 `fl_name = 'AutoOutputFiles/df_capture_stats_' + testing_end + '.csv'`
+
 `df_capture_stats.to_csv(fl_name)`
 
-The capture statistics produced:
+The capture statistics that are produced by the notebook:
+
 `EquityDays = 'Total trading days in test period'`
 
 `EquityDaysPositive = 'Total positive equity return days in test period'`
@@ -160,7 +163,7 @@ The capture statistics produced:
 
 **Optimal Model**
 
-Where the Naive Model arbitrarily sets RFC parameters, the Optimal Model uses [RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html) and `best_params_` method, while iterating over a range of parameter values to determine which average parameter settings lead to the highest annual return expectation. The model parameters and the range of values include:
+Where the Naive Model arbitrarily sets RFC parameters, the Optimal Model uses [RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html) and the `best_params_` method, while iterating over a range of parameter values to determine which average value leads to the highest annual return expectation. The model parameters and the range of values include:
 
 `forest_params = [
         {
@@ -194,10 +197,13 @@ Based on the results from the October 1, 2021 to October 15, 2021 training and t
 
 This notebook also calculates the mean parameter values accross all lags to arrive at mean parameter values used for the Optimal Model.  Based on the October 1, 2021 - October 15, 2021 analysis, the paramter values used for the Optimal Model were:
 
-n_estimators          477.0
-min_samples_split      31.0
-max_features            3.0
-max_depth            2988.0
+`n_estimators = 477.0`
+
+`min_samples_split = 31.0`
+
+`max_features = 3.0`
+
+`max_depth = 2988.0`
 
 These values are used in the next notebook.
 
