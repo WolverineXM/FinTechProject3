@@ -20,7 +20,7 @@ The Random Forest Classifier Model and RandomizedSearchCV are used to develop a 
 
 ### Project Notebooks
 
-[SourceData.ipynb](SourceData.ipynb)
+**Notebook:  [SourceData.ipynb](SourceData.ipynb)**
 
 This notebook retrieves data for both the feature and target sets:
 
@@ -39,7 +39,7 @@ The data for the Target Set data is obtained from yahoo Finance using their `imp
 
 All raw data and data from the constructed data frames as saved as .csv files to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
 
-[rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)
+**Notebook:  [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)**
 
 This note book is used for data visualization and analysis of Feature Set variables to gain an understanding of their relationship with one another and how they may impact the quality of modeling results.  Analysis concludes that the daily rate of return for the OAS time series should be used for modeling, as the linear relationship that appears for the OAS Levels data is removed.  
 
@@ -57,11 +57,11 @@ hvplot.lag_plot() was used to gain an understanding of any lagged relationships 
 
 Finally, an analysis of the two features exhibiting the highest degree of positive correlation was conducted using .hvplot.bivariate()
 
-[rfc_model_target_feature_set_lag_analysis.ipynb](rfc_model_target_feature_set_lag_analysis.ipynb)
+**Notebook:  [rfc_model_target_feature_set_lag_analysis.ipynb](rfc_model_target_feature_set_lag_analysis.ipynb)**
 
 Given that understanding the lagged relationship between the feature and target set is critical to the success of the investment strategy, this notebook is dedicted to visualizing lagged relationships between the feature set and target set.  This notebook also uses the hvplot.lag_plot() method and each OAS feature was paired with the data for the equity's daily price returns.
 
-[Current_rfc_model_optimal_lag_grid_automated.ipynb](Current_rfc_model_optimal_lag_grid_automated.ipynb)
+**Notebook:  [Current_rfc_model_optimal_lag_grid_automated.ipynb](Current_rfc_model_optimal_lag_grid_automated.ipynb)**
 
 The runtime for this notebook is approximately 2 hours and is used for both the Naive & Optimal Model Versions.  
 
@@ -145,11 +145,11 @@ The daily results are saved to the following location and later manually aggrega
 The following image illustrates the file versions for the in-sample period:
 ![](images/best_params_file_location.PNG)
 
-[Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)
+**Notebook:  [Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)**
 
 uses the mean optimal parameters from Current_rfc_model_optimal_lag_grid_automated.ipynb and model is new training and testing occurs for the October 1, 2021 to October 15, 2021 period based on the optimal parameters
 
-[AggregatedStatistics.ipynb](AggregatedStatistics.ipynb)
+**Notebook:  [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb)**
 
 Based on the results from the October 1, 2021 to October 15, 2021 training and testing periods, the Mean Annualized Return Per Feature Lag In Days was calculated for the Naive Model and the lagged period with the highest average return was selected for Forward Testing purposes.  The standard deviation and skew are also calculated for future use.
 
@@ -160,18 +160,18 @@ min_samples_split      31.0
 max_features            3.0
 max_depth            2988.0
 
-[Current_rfc_optimal_model_accuracy_feature_importance.ipynb](Current_rfc_optimal_model_accuracy_feature_importance.ipynb)
+**Notebook:  [Current_rfc_optimal_model_accuracy_feature_importance.ipynb](Current_rfc_optimal_model_accuracy_feature_importance.ipynb)**
 
 Optimal Model Version that also allows for the computation of training & testing accuracy scores, feature importance (Gini Importance or Mean Decrease in Impurity (MDI))
 
-[nieve_vs_random_grid_search_backtest_comparison.ipynb](nieve_vs_random_grid_search_backtest_comparison.ipynb)
+**Notebook:  [nieve_vs_random_grid_search_backtest_comparison.ipynb](nieve_vs_random_grid_search_backtest_comparison.ipynb)**
 
 Compares the testing period return path for the Optimal Model, Naive Model, & Equity Secuity (SPY).  Initial development of capture statistics for both versions of the model.  
 
-[rfc_model_naive_forward_testing_v0004.ipynb](rfc_model_naive_forward_testing_v0004.ipynb)
+**Notebook:  [rfc_model_naive_forward_testing_v0004.ipynb](rfc_model_naive_forward_testing_v0004.ipynb)**
 Forward testing for Naive Model
 
-[rfc_model_optimal_forward_testing_v0004.ipynb](rfc_model_optimal_forward_testing_v0004.ipynb)
+**Notebook:  [rfc_model_optimal_forward_testing_v0004.ipynb](rfc_model_optimal_forward_testing_v0004.ipynb)**
 Forward testing for Optimal Model
 
 ### Usage Instructions
