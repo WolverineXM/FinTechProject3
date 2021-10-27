@@ -227,6 +227,25 @@ The .csv files containing the performance metrics for each model version over ea
 
 **Notebook:  [Current_rfc_optimal_model_accuracy_feature_importance.ipynb](Current_rfc_optimal_model_accuracy_feature_importance.ipynb)**
 
+Once it was determined that the Optimal Model should use a 30 day lag of feature set variables along with `n_estimators = 477.0`, `min_samples_split = 31.0`, `max_features = 3.0`, and `max_depth = 2988.0` this notebook was constructed to determine the 
+
+1. Feature Importance, and
+2. RFC model accuracy levels during the in-sample training and testing periods
+
+![](images/feature_importance.PNG)
+
+Evidence exists that the feature set should be reduced and only include: 
+Feature 0 Index:  ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
+Feature 3 Index:  ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
+Feature 4 Index:  ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
+
+This additional test will be conducted in the future.
+
+Evidence also exists that the optimal model may suffer from overfitting as the accuracy scored experienced a material decline during the testing period.  The Forward Testing Period will be used to confirm if overfitting is an actual issue with the model.
+
+RFC accuracy: TRAINING 0.8709315375982043
+RFC accuracy: TESTING 0.5686274509803921
+
 Optimal Model Version that also allows for the computation of training & testing accuracy scores, feature importance (Gini Importance or Mean Decrease in Impurity (MDI))
 
 **Notebook:  [nieve_vs_random_grid_search_backtest_comparison.ipynb](nieve_vs_random_grid_search_backtest_comparison.ipynb)**
