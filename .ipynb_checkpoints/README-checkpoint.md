@@ -37,7 +37,7 @@ Of note, this notebook also obtains data for other economic time series, but onl
 
 The data for the Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
 
-All raw data and data from the constructed data frames as saved to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
+All raw data and data from the constructed data frames as saved as .csv files to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
 
 [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)
 
@@ -62,6 +62,69 @@ Finally, an analysis of the two features exhibiting the highest degree of positi
 Given that understanding the lagged relationship between the feature and target set is critical to the success of the investment strategy, this notebook is dedicted to visualizing lagged relationships between the feature set and target set.  This notebook also uses the hvplot.lag_plot() method and each OAS feature was paired with the data for the equity's daily price returns.
 
 [Current_rfc_model_optimal_lag_grid_automated.ipynb](Current_rfc_model_optimal_lag_grid_automated.ipynb)
+
+The runtime for this notebook is approximately 2 hours and is used for both the Naive & Optimal Model Versions.  
+
+Critical time periods used for research and development:
+
+Training Period Start Date = October 25, 2011
+Sufficient feature set data exists that allows for using lagged values that align with this training start date
+
+Training Period End Date = December 14, 2018
+Held constant for all in-sample testing
+
+Testing Period Start Date = December 15, 2018
+Held constant for all in-sample testing
+
+Testing Period End Dates was varied to allow for average model parameters to be calculated when using RandomizedSearchCV to determine optimal model parameters
+Range between October 1, 2021 to October 15, 2021
+
+Lagged time frames range from 1 Day to 90 Days
+
+Forward Test Start Date = Monday, October 18, 2021
+
+**Naive Model**
+
+The Naive Model arbitrarily sets the following values for the RandomForestClassifier (RFC) and all other parameters use defaul settings:
+
+n_estimators = 500
+max_depth = 5,000
+max_features = 'auto'
+
+Daily lagged values for the percentage change in OAS, ranging between 1 and end 90 days, were analyzed for the Naive Model. The same parameter values listed immediately above were used for the RFC on each iteration. The RFC model is manually split into training and testing time periods and the notebook is run for each period ending between October 1, 2021 to October 15, 2021.  The results from each days analysis is saved and mannually aggregegated into one file to determine which lag delivered the highest average annualized rate of return.  The use of a third partly library, pyfolio, was used to calculate the following performance statistics
+
+`empyrical.annual_return(algo_performance_series)`
+
+`empyrical.annual_volatility(algo_performance_series)`
+
+`empyrical.sharpe_ratio(algo_performance_series)`
+
+`empyrical.calmar_ratio(algo_performance_series)`
+
+`empyrical.max_drawdown(algo_performance_series)`
+
+`empyrical.sortino_ratio(algo_performance_series)`
+
+`empyrical.alpha(algo_performance_series,Equity_performance_series)`
+
+`empyrical.beta(algo_performance_series,Equity_performance_series)`
+
+The notebook also plots the key statiscs for the Naive Model's current period end using the pyfolio library empyrical.
+
+On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date
+
+.joblib
+`fl_nm = 'model_candidates/nieve/Lag_' + str(i) + '_random_forest_' + testing_end + '.joblib'`
+`joblib.dump(model, fl_nm, compress=3)` 
+![](images/naive_model_testing_file_location_joblib.PNG)
+
+.csv
+fl_nm = 'AutoOutputFiles/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'
+
+![](images/naive_model_testing_file_location_csv.PNG)
+
+Optimal Model
+
 
 iterates over list of lagged feature set to produce Naive results and determine optimal parameter for lagged feature
 
