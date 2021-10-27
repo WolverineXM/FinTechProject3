@@ -2,7 +2,7 @@
 
 ### Project Hypothesis
 
-Existing emperical evidence exists of a relationship between [Credit Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets.  For the purpose of this project, the the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) was selected as a proxy for the U.S. Equity Market.  A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
+Existing emperical evidence exists describing the relationship between [Credit Risk/Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets.  For the purpose of this project, the the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) was selected as a proxy for the U.S. Equity Market.  A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
 
 >>> A structural model with stochastic volatility and jumps implies particular relationships between observed equity returns and credit spreads. 
 
@@ -12,11 +12,11 @@ In addition, the [Merton Model](https://www.investopedia.com/terms/m/mertonmodel
 
 In 1974, economist Robert C. Merton proposed this model for assessing the structural credit risk of a company by modeling the company's equity as a call option on its assets. This model was later extended by Fischer Black and Myron Scholes to develop the Nobel-prize winning Black-Scholes pricing model for options.
 
-In short, the model predicts a non-linear negative link between the default likelihood and asset value of a firm
+> In short, the model predicts a non-linear negative link between the default likelihood and asset value of a firm.
 
-Given the cost of obtaining Credit Default Swap data (preferred data but cost prohibitive), the use of Option Adjusted Spreads (OAS) is explored.  In addition, it is hypothesized that the use of a Machine Learning algorithm can be used to predict future equity market states.  See [Option-Adjusted Spread (OAS)](https://www.investopedia.com/terms/o/optionadjustedspread.asp) for a basic understanding of Option Adjusted Spreads.
+Given the cost of obtaining Credit Default Swap data (preferred data but cost prohibitive), the use of Option Adjusted Spreads (OAS) is explored.  In addition, it is hypothesized that the use of a Machine Learning algorithm can be used to predict future equity market states.  See [Option-Adjusted Spread (OAS)](https://www.investopedia.com/terms/o/optionadjustedspread.asp) for a basic refresher on OASs.
 
-The Random Forest Classifier Model and RandomizedSearchCV are used to develop a Naive Model and Optimal Model to determine if either model can deliver an annual return higher than the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy).
+The Random Forest Classifier Model and RandomizedSearchCV are used to develop a Naive Model and Optimal Model to determine if either model can deliver an annual return higher than the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy).  The Optimal Model also attempts to achieve a superior annual rate of return by using model parameters obtained from RandomizedSearchCV (process described below).
 
 ### Project Notebooks
 
@@ -33,15 +33,28 @@ The Feature Set Variable Names & FRED Mnemonic:
 4. [ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)](https://fred.stlouisfed.org/series/BAMLH0A1HYBB)
 5. [ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)](https://fred.stlouisfed.org/series/BAMLH0A3HYC)
 
-Of note, this notebook also obtains data for other economic time series, but only OAS data for the aboveare used for modeling purposes.
+Of note, this notebook also obtains data for other economic time series, but only OAS data for the above data series are used for modeling purposes.
 
 The data for the Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
 
 
-
 [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)
 
-Data visualization and analysis of Feature Set variables
+This note book is used for data visualization and analysis of Feature Set variables to gain an understanding of their relationship with one another and how they may impact the quality of modeling results.  Analysis concludes that the daily rate of return for the OAS time series should be used for modeling, as the linear relationship that appears for the OAS Levels data is removed.  
+
+A simple line plot confirms that some relationship exists between OAS levels and this relationship is likely time dependent as well.  The OAS levels are transformed into daily percentage changes and these values are used for modeling purposes.
+
+The Pearson Correlation Coefficient was used to confirm that the correlation between the daily percentage change in OAS is less than the correlation for OAS levels.
+
+The hvplot.scatter_matrix() method was used to also confirm that this apparent relationship between OAS levels is removed when transforming them into daily percentage changes.
+
+An analysis on the distribution (density plot) for the OAS Levels and Daily Percentage Changes using hvplot.kde() also concluded that daily percentage changes were more appropriate for modeling purposes.
+
+An understanding of the disperion of OAS levels and rates of change was gained through the use of hvplot.violin().
+
+hvplot.lag_plot() was used to gain an understanding of any lagged relationships between the feature set variables.
+
+Finally, an analysis of the two features exhibiting the highest degree of positive correlation was conducted using .hvplot.bivariate()
 
 [rfc_model_target_feature_set_lag_analysis.ipynb](rfc_model_target_feature_set_lag_analysis.ipynb)
 
