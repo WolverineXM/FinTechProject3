@@ -229,12 +229,12 @@ The .csv files containing the performance metrics for each model version over ea
 
 Once it was determined that the Optimal Model should use a 30 day lag of feature set variables along with `n_estimators = 477.0`, `min_samples_split = 31.0`, `max_features = 3.0`, and `max_depth = 2988.0` this notebook was constructed to determine the 
 
-1. Feature Importance, and
+1. Feature Importance (Gini Importance or Mean Decrease in Impurity (MDI)), and
 2. RFC model accuracy levels during the in-sample training and testing periods
 
 ![](images/feature_importance.PNG)
 
-Evidence exists that the feature set should be reduced and only include the features at index 0, 3, and 4.  For you reference, these are:
+Evidence exists that the feature set should be reduced and only include the features at index 0, 3, and 4.  For your reference, these are:
 1. Feature 0 Index:  ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
 2. Feature 3 Index:  ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
 3. Feature 4 Index:  ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
@@ -243,20 +243,54 @@ This additional test will be conducted in the future.
 
 Evidence also exists that the optimal model may suffer from overfitting as the accuracy scored experienced a material decline during the testing period.  The Forward Testing Period will be used to confirm if overfitting is an actual issue with the model.
 
-RFC accuracy: TRAINING 0.8709315375982043
-RFC accuracy: TESTING 0.5686274509803921
+RFC Accuracy During Training Period: TRAINING 0.8709315375982043
 
-Optimal Model Version that also allows for the computation of training & testing accuracy scores, feature importance (Gini Importance or Mean Decrease in Impurity (MDI))
+RFC Accuracy During Testing Period: TESTING 0.5686274509803921
+
+All results reflect a testing period ending on October 15, 2021.
 
 **Notebook:  [nieve_vs_random_grid_search_backtest_comparison.ipynb](nieve_vs_random_grid_search_backtest_comparison.ipynb)**
 
-Compares the testing period return path for the Optimal Model, Naive Model, & Equity Secuity (SPY).  Initial development of capture statistics for both versions of the model.  
+At this stage we have determined that the following models should be used for forward testing:
+1. Naive Model With 27 Day Lag and Naive Parmaters
+2. Optimal Model With 30 Day Lag and Optimal Parameters
+
+A cumulative return plot for the Equity Security, Naive Model, and Optimal Model during the in-sample testing period was constructed to understand the return path for each.  This analysis helps in answering:
+1. Were strategy returns earned during volatile periods?
+2. Were strategy returns earned during up markets or down markets?
+3. Are there periods where one outperforms the other and how consistently does this occur?
+
+Evidence exists that the Naive model offers better downside risk protection, but at the expense of some return.
+
+Evidence exists that the Optimal Model capture more downside risk, however delivers superior return for the majority of the test period.
+
+By the end of the test period, the unitized cumulative return for the Naive & Optimal Model are converging, suggesting that a longer test period may be required to understand which model is most appropriate.  The Forward Test results are also expected to aid in this endeavour, however a backtested version is ideal to conduct additional testings.
+
+Currently under development, this notebook also contains preliminary work for comparing the Capture Statistics for both the Naive and Optimal Model.  This numerical analysis compliments the return path analysis.
 
 **Notebook:  [rfc_model_naive_forward_testing_v0004.ipynb](rfc_model_naive_forward_testing_v0004.ipynb)**
-Forward testing for Naive Model
+
+This notebook represents the Forward Testing for the Naive Model.
+
+The `model_candidates/nieve/Lag_27_random_forest_2021-10-15.joblib` model is loaded for out-of-sample (Forward Test) purposes.  Given the project dealine, only 6 Forward Test results are currently available for the following dates:
+
+`2021-10-18, 2021-10-19, 2021-10-20, 2021-10-21, 2021-10-22, and 2021-10-25`
+
+The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.  Given that only 6 out-sample-results are available, the code that returns the forward test predictions, `new_predictions = all_new_predictions.iloc[-6:]`, is manually updated (next day's value = -7) the following day's run.
 
 **Notebook:  [rfc_model_optimal_forward_testing_v0004.ipynb](rfc_model_optimal_forward_testing_v0004.ipynb)**
-Forward testing for Optimal Model
+
+This notebook represents the Forward Testing for the Optimal Model.
+
+The `algo_optimal_parameters/back_test_using_mean_grid_values/Lag_30_random_forest_2021-10-15.joblib` model is loaded for out-of-sample (Forward Test) purposes.  Given the project dealine, only 6 Forward Test results are currently available for the following dates:
+
+`2021-10-18, 2021-10-19, 2021-10-20, 2021-10-21, 2021-10-22, and 2021-10-25`
+
+The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.
+
+Let the Forward Test Battle Begin - well, only 6 days thus far!
+
+![](forward_test_results)
 
 ### Usage Instructions
 
