@@ -29,7 +29,8 @@ The Random Forest Classifier Model and RandomizedSearchCV are used to develop a 
 
 The hypothesis may be summarized as follows:
 
-> The use of lagged values for OAS accross
+> Lagged values for the daily change in OASs across different credit ratings can predict the future state of equity markets.
+
 ### Project Notebooks
 
 **Notebook:  [SourceData.ipynb](SourceData.ipynb)**
