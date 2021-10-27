@@ -101,7 +101,7 @@ Daily lagged values for the percentage change in OAS, ranging between 1 and 90 d
 
 The notebook also plots the above statiscs for the Naive Model's current period end using the pyfolio library empyrical.
 
-On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date
+On each iteration, a .csv and .joblib version of the model is saved to the following following location, where i = lag value, testing_end = period end date is the `fl_nm` variable:
 
 **.joblib**
 
@@ -114,13 +114,36 @@ The following image illustrates the file versions for the 90 day lag
 **.csv**
 
 `fl_nm = 'AutoOutputFiles/Lag_' + str(i) + '_df_performance_results_' + testing_end + '.csv'`
+
 The following image illustrates the file versions for the 90 day lag
 ![](images/naive_model_testing_file_location_csv.PNG)
 
-Optimal Model
+**Optimal Model**
 
+Where the Naive Model arbitrarily sets RFC parameters, the Optimal Model uses [RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html) and `best_params_` method, while iterating over a range of parameter values to determine which average parameter settings lead to the highest annual return expectation. The model parameters and the range of values include:
 
-iterates over list of lagged feature set to produce Naive results and determine optimal parameter for lagged feature
+`forest_params = [
+        {
+            'max_depth': list(range(9, 6001)), 
+            'max_features': list(range(1,6)),
+            'n_estimators': list(range(1,1001)),
+            'min_samples_split': list(range(1,51))
+        }
+    ]`
+
+The RandomizedSearchCV also takes on the following parameters and assocated values: 
+
+`cv_value = 5`
+
+`scoring='accuracy'`
+
+The daily results are saved to the following location and later manually aggregated into one file for use in [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb) to determine the average parameter values over the October 1, 2021 to October 15, 2021 in-sample period.
+
+`fl_name = 'AutoOutputFiles/df_best_params_' + testing_end + '.csv'`
+`df_best_params.to_csv(fl_name)`
+
+The following image illustrates the file versions for the in-sample period:
+![](images/best_params_file_location.PNG)
 
 [Current_rfc_model_algo_optimal_params_all_avg.ipynb](Current_rfc_model_algo_optimal_params_all_avg.ipynb)
 
