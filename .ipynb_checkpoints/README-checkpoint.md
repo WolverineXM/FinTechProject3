@@ -31,6 +31,8 @@ The hypothesis may be summarized as follows:
 
 > Lagged values for the daily change in OASs across different credit ratings can predict the future state of equity markets.
 
+It is also recommended that the user read [Project_3_Presentation](Project_3_Presentation.pptx) prior to proceeding further, as it provides additional context for the user.
+
 ### Project Notebooks
 
 **Notebook:  [SourceData.ipynb](SourceData.ipynb)**
