@@ -98,7 +98,7 @@ Of note, this notebook also obtains data for other economic time series, but onl
 
 The data for the Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
 
-All raw data and data from the constructed data frames as saved as .csv files to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
+All raw data and data from the constructed data frames are saved as .csv files to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
 
 **Notebook:  [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)**
 
@@ -112,7 +112,7 @@ The `hvplot.scatter_matrix()` method was used to also confirm that this apparent
 
 An analysis on the distribution (density plot) for the OAS Levels and Daily Percentage Changes using `hvplot.kde()` also concluded that daily percentage changes were more appropriate for modeling purposes.
 
-An understanding of the disperion of OAS levels and rates of change was gained through the use of hvplot.violin().
+An understanding of the disperion of OAS levels and rates of change was gained through the use of `hvplot.violin()`.
 
 `hvplot.lag_plot()` was used to gain an understanding of any lagged relationships between the feature set variables.
 
@@ -188,8 +188,6 @@ Caputre statistics are also computed and the same aggregation and averaging proc
 
 `fl_name = 'AutoOutputFiles/df_capture_stats_' + testing_end + '.csv'`
 
-`df_capture_stats.to_csv(fl_name)`
-
 The capture statistics that are produced by the notebook:
 
 `EquityDays = 'Total trading days in test period'`
@@ -202,9 +200,9 @@ The capture statistics that are produced by the notebook:
 
 `StrategyDaysInCash = 'Total days the strategy was invested in cash'`
 
-`StrategyCapturePositive = 'Of the equity's positive days, how many days did the strategy capture'`
+`StrategyCapturePositive = 'For the equity's positive days, how many days was the strategy invested in the equity'`
 
-`StrategyCaptureNegative = 'Of the equity's negative days, however may days did the strategy capture'`
+`StrategyCaptureNegative = 'For the equity's negative days, how many days was the strategy invested in the equity'`
 
 `EquityDays>=1% = 'Total number of days the equity delivered a return greater than or equal to 1%:  Positive Extreme'`
 
@@ -227,7 +225,7 @@ Where the Naive Model arbitrarily sets RFC parameters, the Optimal Model uses [R
         }
     ]`
 
-The RandomizedSearchCV also takes on the following parameters and assocated values: 
+The RandomizedSearchCV function also takes on the following parameters and values: 
 
 `cv_value = 5`
 
@@ -236,8 +234,6 @@ The RandomizedSearchCV also takes on the following parameters and assocated valu
 The daily results are saved to the following location and later manually aggregated into one file for use in [AggregatedStatistics.ipynb](AggregatedStatistics.ipynb) to determine the average parameter values over the October 1, 2021 to October 15, 2021 in-sample period.
 
 `fl_name = 'AutoOutputFiles/df_best_params_' + testing_end + '.csv'`
-
-`df_best_params.to_csv(fl_name)`
 
 The following image illustrates the file versions for the in-sample period:
 ![](images/best_params_file_location.PNG)
@@ -296,9 +292,9 @@ This additional test will be conducted in the future.
 
 Evidence also exists that the optimal model may suffer from overfitting as the accuracy scored experienced a material decline during the testing period.  The Forward Testing Period will be used to confirm if overfitting is an actual issue with the model.
 
-RFC Accuracy During Training Period: TRAINING 0.8709315375982043
+RFC Accuracy During Training Period: 0.8709315375982043
 
-RFC Accuracy During Testing Period: TESTING 0.5686274509803921
+RFC Accuracy During Testing Period: 0.5686274509803921
 
 All results reflect a testing period ending on October 15, 2021.
 
