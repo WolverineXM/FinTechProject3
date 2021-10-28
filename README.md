@@ -349,6 +349,8 @@ Let the Forward Test Battle Begin - well, only 6 days thus far!
 4. Use findings from feature set analysis and feature importance to reduce the feature set to only include 
    
    Feature 0 Index: ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
+   
    Feature 3 Index: ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
+   
    Feature 4 Index: ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
 
