@@ -340,3 +340,15 @@ The results are currently stored within a Pandas Series, with eventual plans of 
 Let the Forward Test Battle Begin - well, only 6 days thus far!
 
 ![](images/forward_test_results.PNG)
+
+### Post Mortem & Future Enhancements
+
+1. Develop a more robust averaging period to determine optimal RFC parameters
+2. Calculate mean RFC parameters across different dimension (Each lags’ own test history averages rather than average across all lags)
+3. Better control for Naïve RFC parameter settings by explicitly stating all the Naïve parameter settings to ensure reproducibility of results
+4. Use findings from feature set analysis and feature importance to reduce the feature set to only include 
+   
+   Feature 0 Index: ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2)
+   Feature 3 Index: ICE BofA BB US High Yield Index Option-Adjusted Spread (BAMLH0A1HYBB)
+   Feature 4 Index: ICE BofA CCC & Lower US High Yield Index Option-Adjusted Spread (BAMLH0A3HYC)
+
