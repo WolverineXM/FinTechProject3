@@ -2,7 +2,7 @@
 
 ### Project Hypothesis
 
-Existing emperical evidence exists describing the relationship between [Credit Risk/Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets. A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
+Existing emperical evidence exists that describes the relationship between [Credit Risk Premiums/Spreads](https://www.investopedia.com/terms/c/creditspread.asp) and equity markets. A paper published by the Bank for International Settlements (BIS), [Explaining Credit Default Swap Spreads with Equity Volatility and Jump Risks of Individual Firms](https://www.bis.org/publ/work181.pdf) concluded:
 
 >>> A structural model with stochastic volatility and jumps implies particular relationships between observed equity returns and credit spreads. 
 
@@ -96,15 +96,15 @@ The data for the Feature Set is obtained from [FRED](https://fredhelp.stlouisfed
 
 Of note, this notebook also obtains data for other economic time series, but only OAS data for the above data series are used for modeling purposes.
 
-The data for the Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
+The Target Set data is obtained from yahoo Finance using their `import yfinance as yf` library.  As noted above, the [SPDR® S&P 500® ETF Trust](https://www.ssga.com/us/en/intermediary/etfs/funds/spdr-sp-500-etf-trust-spy) is the target set.
 
 All raw data and data from the constructed data frames are saved as .csv files to the [AutoOutputFiles](AutoOutputFiles) folder for use by other notebooks.
 
 **Notebook:  [rfc_model_feature_set_analysis.ipynb](rfc_model_feature_set_analysis.ipynb)**
 
-This note book is used for data visualization and analysis of Feature Set variables to gain an understanding of their relationship with one another and how they may impact the quality of modeling results.  Analysis concludes that the daily rate of return for the OAS time series should be used for modeling, as the linear relationship that appears for the OAS Levels data is removed.  
+This note book is used for data visualization and analysis of Feature Set data to gain an understanding of their relationship with one another and how they may impact the quality of modeling results.  Analysis concludes that the daily rate of return for the OAS time series should be used for modeling, as the linear relationship that appears for the OAS Levels data is removed.  
 
-A simple line plot confirms that some relationship exists between OAS levels and this relationship is likely time dependent as well.  The OAS levels are transformed into daily percentage changes and these values are used for modeling purposes.
+A simple line plot confirms that some relationship exists between OAS levels and this relationship is likely time dependent.  The OAS levels are transformed into daily percentage changes and these values are used for modeling purposes.
 
 The Pearson Correlation Coefficient was used to confirm that the correlation between the daily percentage change in OAS is less than the correlation for OAS levels.
 
@@ -131,7 +131,7 @@ Critical time periods used for research and development:
 1. Training Period Start Date = October 25, 2011 (Held constant for all in-sample testing)
 2. Training Period End Date = December 14, 2018 (Held constant for all in-sample testing)
 3. Testing Period Start Date = December 15, 2018 (Held constant for all in-sample testing)
-4. Testing Period End Dates was varied to allow for average model parameters to be calculated when using RandomizedSearchCV to determine optimal model parameters.  The testing period range is between October 1, 2021 to October 15, 2021
+4. Testing Period End Dates was varied to allow for average model parameters to be calculated when using RandomizedSearchCV to determine optimal model parameters.  The testing period range is October 1, 2021 to October 15, 2021
 5.  Forward Test Start Date = Monday, October 18, 2021
 
 **Naive Model**
