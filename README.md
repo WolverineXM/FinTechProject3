@@ -290,7 +290,7 @@ Evidence exists that the feature set should be reduced and only include the feat
 
 This additional test will be conducted in the future.
 
-Evidence also exists that the optimal model may suffer from overfitting as the accuracy scored experienced a material decline during the testing period.  The Forward Testing Period will be used to confirm if overfitting is an actual issue with the model.
+Evidence also exists that the optimal model may suffer from overfitting as the accuracy score experienced a material decline during the testing period.  The Forward Testing Period will be used to confirm if overfitting is an actual issue with the model.
 
 RFC Accuracy During Training Period: 0.8709315375982043
 
@@ -325,7 +325,7 @@ The `model_candidates/nieve/Lag_27_random_forest_2021-10-15.joblib` model is loa
 
 `2021-10-18, 2021-10-19, 2021-10-20, 2021-10-21, 2021-10-22, and 2021-10-25`
 
-The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.  Given that only 6 out-sample-results are available, the code that returns the forward test predictions, `new_predictions = all_new_predictions.iloc[-6:]`, is manually updated (next day's value = -7) the following day's run.
+The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.  Given that only 6 out-sample-results are available, the code that returns the forward test predictions, `new_predictions = all_new_predictions.iloc[-6:]`, is manually updated (next day's value = -7) prior to the following day's run.
 
 **Notebook:  [rfc_model_optimal_forward_testing_v0004.ipynb](rfc_model_optimal_forward_testing_v0004.ipynb)**
 
@@ -335,7 +335,7 @@ The `algo_optimal_parameters/back_test_using_mean_grid_values/Lag_30_random_fore
 
 `2021-10-18, 2021-10-19, 2021-10-20, 2021-10-21, 2021-10-22, and 2021-10-25`
 
-The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.
+The results are currently stored within a Pandas Series, with eventual plans of storing in a Pandas Data Frame.  Given that only 6 out-sample-results are available, the code that returns the forward test predictions, `new_predictions = all_new_predictions.iloc[-6:]`, is manually updated (next day's value = -7) prior to the following day's run.
 
 Let the Forward Test Battle Begin - well, only 6 days thus far!
 
